@@ -1,0 +1,33 @@
+#upload-container {
+  padding-top: 36px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  #upload-img {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(230, 230, 230);
+    background: rgb(250, 250, 230);
+    margin-left: 16px;
+    .icon-carmera {
+      width: 50px;
+      span {
+        font-size: 14px;
+        color: rgb(194, 194, 204);
+      }
+    }
+  }
+  .ant-form-item-required {
+    display: inline-block;
+    width: 150px;
+  }
+  #submit-button {
+    display: block;
+    margin: 0 auto;
+  }
+}

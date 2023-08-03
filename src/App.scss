@@ -1,0 +1,404 @@
+$tablet-max: 1023px;
+$desktop-min: 1440px;
+
+@mixin tablet {
+  @media (max-width: $tablet-max) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (max-width: $desktop-min) {
+    @content;
+  }
+}
+.App {
+  .header {
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.8);
+    .container {
+      width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      .logo {
+        width: 180px;
+      }
+      .nav {
+        .listWrap {
+          display: flex;
+          list-style: none;
+          li {
+            margin: 0 20px;
+            a {
+              color: #222;
+              text-decoration: none;
+              transition: 0.5s;
+              font-size: 24px;
+              &:hover {
+                color: yellowgreen;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+      .mobileBar {
+        display: none;
+        .hamburgerIcon {
+          font-size: 30px;
+        }
+        .nav {
+          display: block;
+          position: absolute;
+          top: 100px;
+          left: 0;
+          width: 100%;
+          ul {
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            background: rgba(255, 255, 255, 0.8);
+            li {
+              padding: 10px 0;
+              border-bottom: 1px solid #ddd;
+            }
+          }
+        }
+      }
+      .btn {
+        background: none;
+        width: 80px;
+        border-radius: 5px;
+        padding: 10px 5px;
+      }
+    }
+  }
+  //main Slide
+  .mainImg {
+    width: 100%;
+    img {
+      width: 100%;
+    }
+  }
+  //mdpick
+  .mdpick {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 100px 0;
+    h2 {
+      z-index: 1;
+      position: relative;
+      &::after {
+        content: "";
+        width: 50px;
+        height: 15px;
+        background: #cecdcd;
+        position: absolute;
+        top: -5px;
+        left: 0px;
+        z-index: -1;
+      }
+    }
+    .mdList {
+      ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        li {
+          position: relative;
+          flex-basis: 33.33%;
+          display: flex;
+          flex-direction: column;
+          &:not(:last-child) {
+            margin-right: 20px;
+          }
+          .md-img {
+            img {
+              width: 100%;
+            }
+          }
+          .mdname {
+            font-size: 1.4rem;
+          }
+          .mdprice {
+            color: #999999;
+          }
+          .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba($color: #f0efef, $alpha: 0.2);
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            box-sizing: border-box;
+            color: rgba($color: #000000, $alpha: 1);
+            opacity: 0;
+            &:hover {
+              transition: 0.5s;
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+  .banner {
+    width: 100%;
+    height: 200px;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      color: #fff;
+      font-size: 45px;
+      text-transform: uppercase;
+      text-shadow: -3px -5px 3px #bebebe;
+    }
+  }
+  //products
+  .products {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 100px 0;
+    h2 {
+      z-index: 1;
+      position: relative;
+      &::after {
+        content: "";
+        width: 50px;
+        height: 15px;
+        background: #ffecec;
+        position: absolute;
+        top: -5px;
+        left: 0px;
+        z-index: -1;
+      }
+    }
+    .p-list {
+      display: flex;
+      .product-link {
+        text-decoration: none;
+        color: #333;
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+        .product-card {
+          .product-img {
+            width: 100%;
+          }
+          .product-contenst {
+            flex-direction: column;
+            display: flex;
+            .product-name {
+              font-size: 20px;
+            }
+            .product-price {
+              font-size: 14px;
+            }
+            .product-seller {
+              margin-top: 20px;
+              display: flex;
+              justify-content: space-between;
+              .product-avatar {
+                color: #20ee98;
+                font-size: 18px;
+              }
+              .seller {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  //MAGAZIN
+  .magazine {
+    width: 100%;
+    overflow: hidden;
+    padding: 100px 0;
+    .container {
+      width: 1440px;
+      margin: 0 auto;
+      h2 {
+        position: relative;
+        z-index: 1;
+        &::after {
+          content: "";
+          width: 50px;
+          height: 15px;
+          background: #20ee98;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -1;
+        }
+      }
+      .magazineList {
+        position: relative;
+        height: 608px;
+        display: flex;
+        .magazine-box {
+          width: 298px;
+          height: 100%;
+          background: url(./img/incens/incens-2.png) no-repeat;
+          box-sizing: border-box;
+          padding: 20px;
+          font-size: 50px;
+          position: relative;
+        }
+        .swiper-wrap {
+          width: 100%;
+
+          position: absolute;
+          left: 320px;
+          display: flex;
+          .mg-img {
+            height: 100%;
+            img {
+              width: 100%;
+              height: 608px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .foot-bg {
+    width: 100%;
+    height: 400px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(./img/mainslide/slide4.jpg);
+    .container {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 50px 0;
+      display: flex;
+      box-sizing: border-box;
+      .foot-addr {
+        margin-right: 50px;
+        .foot-logo {
+          margin-bottom: 20px;
+          img {
+            width: 150px;
+          }
+        }
+        address {
+          color: #eee;
+          font-style: normal;
+        }
+        .copy {
+          color: #eee;
+        }
+      }
+      .foot-menu {
+        flex-grow: 1;
+        > ul {
+          display: flex;
+          list-style: none;
+          padding: 0;
+          > li {
+            flex-basis: 33.33%;
+            > a {
+              font-size: 18px;
+              color: #fff;
+              font-weight: bold;
+              text-decoration: none;
+            }
+            ul {
+              padding: 0;
+              li {
+                list-style: none;
+                a {
+                  margin-top: 20px;
+                  font-size: 14px;
+                  color: #b6b6b6;
+                  font-weight: bold;
+                  text-decoration: none;
+                  display: block;
+                  margin-bottom: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include tablet {
+    .header {
+      .container {
+        width: 100%;
+        padding: 0 2rem;
+        box-sizing: border-box;
+        h1 {
+          order: 2;
+        }
+        .logo {
+        }
+        .nav {
+          display: none;
+          z-index: 50;
+        }
+        .mobileBar {
+          display: block;
+          order: 1;
+        }
+        .btn {
+          background: none;
+          width: 80px;
+          border-radius: 5px;
+          padding: 10px 5px;
+          order: 3;
+        }
+      }
+    }
+
+    .products {
+      padding: 30px 20px;
+    }
+  }
+  @include desktop {
+    .header {
+      width: 100%;
+      height: 100px;
+      border-bottom: 1px solid #ccc;
+      background: rgba(255, 255, 255, 0.8);
+      .container {
+        width: 100%;
+        padding: 0 2rem;
+        box-sizing: border-box;
+      }
+    }
+    .products {
+      width: 100%;
+      padding: 60px 20px;
+      box-sizing: border-box;
+    }
+    .foot-bg {
+      .container {
+        width: 100%;
+        padding: 50px 20px;
+      }
+    }
+    .mdpick {
+      width: 100%;
+      padding: 80px 20px;
+      box-sizing: border-box;
+    }
+    .banner {
+      p {
+        font-size: 150%;
+        transition: 0.5s;
+      }
+    }
+  }
+}
