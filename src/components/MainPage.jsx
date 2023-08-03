@@ -11,7 +11,7 @@ import ProductPage from "./ProductPage";
 const MainPage = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    let url = "https://ada8b2a4-ab8c-4996-abcb-b1bf5a08cb4a.mock.pstmn.io/products";
+    let url = "http://localhost:8080/products";
     axios
       .get(url)
       .then((result) => {
