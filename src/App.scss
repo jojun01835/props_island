@@ -184,15 +184,19 @@ $desktop-min: 1440px;
     }
     .p-list {
       display: flex;
+      flex-wrap: wrap;
+
       .product-link {
         text-decoration: none;
         color: #333;
+        flex-basis: 31%;
         &:not(:last-child) {
           margin-right: 20px;
         }
         .product-card {
           .product-img {
             width: 100%;
+            max-height: 400px;
           }
           .product-contenst {
             flex-direction: column;

@@ -4,18 +4,16 @@ import MainSlide from "./MainSlide";
 import MdPick from "./MdPick";
 import { Link } from "react-router-dom";
 import Magazine from "./Magazine";
-import Header from "./Header";
 import axios from "axios";
-import ProductPage from "./ProductPage";
-
+import { API_URL } from "../config/constants";
 const MainPage = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    let url = "http://localhost:8080/products";
+    let url = `${API_URL}/products`;
     axios
       .get(url)
       .then((result) => {
-        const products = result.data.products;
+        const products = result.data.product;
         setProducts(products);
       })
       .catch((error) => {
@@ -33,12 +31,12 @@ const MainPage = () => {
       <div className="products">
         <h2>Products</h2>
         <div id="product-list" className="p-list">
-          {products.map((product, idx) => {
+          {products.map((product) => {
             return (
-              <Link className="product-link" to={`/ProductPage/${idx}`}>
-                <div className="product-card" key={idx}>
+              <Link className="product-link" to={`/ProductPage/${product.id}`}>
+                <div className="product-card" key={product.id}>
                   <div>
-                    <img src={product.imageUrl} alt="" className="product-img" />
+                    <img src={`${API_URL}/${product.imageUrl}`} alt="" className="product-img" />
                   </div>
                   <div className="product-contenst">
                     <span className="product-name">{product.name}</span>

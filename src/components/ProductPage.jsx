@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProductPage.scss";
+import { API_URL } from "../config/constants";
+import dayjs from "dayjs";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -10,9 +12,9 @@ const ProductPage = () => {
 
   useEffect(() => {
     axios
-      .get(`https://ada8b2a4-ab8c-4996-abcb-b1bf5a08cb4a.mock.pstmn.io/products/${id}`)
+      .get(`${API_URL}/products/${id}`)
       .then((result) => {
-        setProduct(result.data);
+        setProduct(result.data.product);
       })
       .catch((error) => {
         console.log(error);
@@ -28,14 +30,14 @@ const ProductPage = () => {
         뒤로가기
       </button>
       <div id="image-box">
-        <img src={`/${product.imageUrl}`} alt={product.name}></img>
+        <img src={`${API_URL}/${product.imageUrl}`} alt={product.name}></img>
         <div id="profile-box">
           <img src="/img/icons/icon.png" alt={product.seller} />
           <span className="product-seller">{product.seller}</span>
           <div id="content-box">
             <div id="name">{product.name}</div>
             <div id="price">{product.price}</div>
-            <div id="crateAt">2023.08.02</div>
+            <div id="crateAt">{dayjs(product.createdAt).format("YYYY MM DD")}</div>
             <div id="description">{product.description}</div>
           </div>
         </div>
