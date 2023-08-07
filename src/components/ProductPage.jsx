@@ -18,6 +18,7 @@ const ProductPage = () => {
   const [isPasswordModalVisible, setPasswordModalVisible] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const [masterPassword, setMasterPassword] = useState("whwnsdud!"); // 마스터 암호 추가
 
   useEffect(() => {
     getProduct();
@@ -70,17 +71,30 @@ const ProductPage = () => {
       axios
         .post(`${API_URL}/products/${id}/verify-password`, { password: hashedPassword }) // 암호화된 비밀번호를 전송합니다.
         .then(() => {
-          // 비밀번호가 맞으면 서버에서 제품을 삭제합니다.
-          axios
-            .delete(`${API_URL}/products/${id}`, { data: { password: hashedPassword } }) // 암호화된 비밀번호를 전송합니다.
-            .then(() => {
-              message.info(`제품이 삭제되었습니다.`);
-              setPasswordModalVisible(false);
-              navigate(-1);
-            })
-            .catch((error) => {
-              message.error(`에러가 발생했습니다: ${error.message}`);
-            });
+          // 마스터 암호를 검증합니다.
+          bcrypt.compare(masterPassword, password, (err, result) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+
+            if (result) {
+              // 비밀번호가 맞으면 서버에서 제품을 삭제합니다.
+              axios
+                .delete(`${API_URL}/products/${id}`, { data: { password: hashedPassword } }) // 암호화된 비밀번호를 전송합니다.
+                .then(() => {
+                  message.info(`제품이 삭제되었습니다.`);
+                  setPasswordModalVisible(false);
+                  navigate(-1);
+                })
+                .catch((error) => {
+                  message.error(`에러가 발생했습니다: ${error.message}`);
+                });
+            } else {
+              // 비밀번호가 틀리면 에러 처리합니다.
+              setPasswordError(true);
+            }
+          });
         })
         .catch(() => {
           // 비밀번호가 틀리면 에러 처리합니다.
