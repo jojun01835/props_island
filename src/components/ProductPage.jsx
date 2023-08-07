@@ -50,29 +50,6 @@ const ProductPage = () => {
     setPassword("");
     setPasswordError(false);
     setPasswordModalVisible(true);
-    // 삭제를 위해 서버로 요청을 보내지 않고, 먼저 비밀번호를 확인하는 API를 호출합니다.
-    axios
-      .post(`${API_URL}/products/${id}/verify-password`, { password })
-      .then(() => {
-        // 비밀번호가 일치하는 경우 서버로 제품 삭제를 요청합니다.
-        axios
-          .delete(`${API_URL}/products/${id}`)
-          .then(() => {
-            message.info(`제품이 삭제되었습니다.`);
-            navigate(-1); // 삭제 후, 뒤로 가기
-          })
-          .catch((error) => {
-            message.error(`에러가 발생했습니다: ${error.message}`);
-          });
-      })
-      .catch(() => {
-        // 비밀번호가 일치하지 않는 경우 에러 처리합니다.
-        setPasswordError(true);
-      })
-      .finally(() => {
-        // 모달 닫기
-        setPasswordModalVisible(false);
-      });
   };
 
   const handlePasswordChange = (e) => {
@@ -86,9 +63,10 @@ const ProductPage = () => {
       .then(() => {
         // 비밀번호가 맞으면 서버에서 제품을 삭제합니다.
         axios
-          .delete(`${API_URL}/products/${id}`)
+          .delete(`${API_URL}/products/${id}`, { data: { password } }) // 비밀번호 추가
           .then(() => {
             message.info(`제품이 삭제되었습니다.`);
+            setPasswordModalVisible(false); // 비밀번호 검증 및 삭제 후 모달 닫기
             navigate(-1); // 삭제 후, 뒤로 가기
           })
           .catch((error) => {
@@ -98,10 +76,6 @@ const ProductPage = () => {
       .catch(() => {
         // 비밀번호가 틀리면 에러 처리합니다.
         setPasswordError(true);
-      })
-      .finally(() => {
-        // 모달 닫기
-        setPasswordModalVisible(false);
       });
   };
 
