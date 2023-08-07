@@ -7,6 +7,7 @@ import "./ProductPage.scss";
 import { Button, message, Input, Modal } from "antd";
 import { API_URL } from "../config/constants";
 import dayjs from "dayjs";
+import bcrypt from "bcryptjs";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -59,26 +60,33 @@ const ProductPage = () => {
   };
 
   const handlePasswordSubmit = () => {
-    // 서버로 비밀번호를 보내서 검증합니다.
-    axios
-      .post(`${API_URL}/products/${id}/verify-password`, { password })
-      .then(() => {
-        // 비밀번호가 맞으면 서버에서 제품을 삭제합니다.
-        axios
-          .delete(`${API_URL}/products/${id}`, { data: { password } })
-          .then(() => {
-            message.info(`제품이 삭제되었습니다.`);
-            setPasswordModalVisible(false);
-            navigate(-1);
-          })
-          .catch((error) => {
-            message.error(`에러가 발생했습니다: ${error.message}`);
-          });
-      })
-      .catch(() => {
-        // 비밀번호가 틀리면 에러 처리합니다.
-        setPasswordError(true);
-      });
+    // 클라이언트에서 비밀번호를 암호화하여 서버로 전송합니다.
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+
+      axios
+        .post(`${API_URL}/products/${id}/verify-password`, { password: hashedPassword }) // 암호화된 비밀번호를 전송합니다.
+        .then(() => {
+          // 비밀번호가 맞으면 서버에서 제품을 삭제합니다.
+          axios
+            .delete(`${API_URL}/products/${id}`, { data: { password: hashedPassword } }) // 암호화된 비밀번호를 전송합니다.
+            .then(() => {
+              message.info(`제품이 삭제되었습니다.`);
+              setPasswordModalVisible(false);
+              navigate(-1);
+            })
+            .catch((error) => {
+              message.error(`에러가 발생했습니다: ${error.message}`);
+            });
+        })
+        .catch(() => {
+          // 비밀번호가 틀리면 에러 처리합니다.
+          setPasswordError(true);
+        });
+    });
   };
 
   if (loading) {
