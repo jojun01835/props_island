@@ -185,15 +185,25 @@ $desktop-min: 1440px;
     .p-list {
       display: flex;
       flex-wrap: wrap;
-
-      .product-link {
-        text-decoration: none;
-        color: #333;
+      .product-card {
         flex-basis: 31%;
-        &:not(:last-child) {
-          margin-right: 20px;
+        margin-right: 20px;
+        position: relative;
+        .product-blur {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ffffffaa;
+          pointer-events: none;
         }
-        .product-card {
+        .product-link {
+          text-decoration: none;
+          color: #333;
+          &:not(:last-child) {
+          }
+
           .product-img {
             width: 100%;
             max-height: 400px;

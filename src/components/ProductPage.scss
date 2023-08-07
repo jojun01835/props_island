@@ -1,3 +1,8 @@
+.product-wrap {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
 #back-btn {
   display: flex;
   margin: 20px auto;
@@ -45,6 +50,9 @@
   #crateAt {
     font-size: 12px;
     color: rgba(204, 204, 204);
+  }
+  .payment {
+    margin: 16px 0px;
   }
   #description {
     margin-top: 16px;
