@@ -45,7 +45,7 @@ const ProductPage = () => {
 
   const onClickDelete = () => {
     axios
-      .delete(`${API_URL}/products/${id}`)
+      .delete(`${API_URL}/ProductPage/${id}`)
       .then(() => {
         message.info(`제품이 삭제되었습니다.`);
         navigate(-1); // 삭제 후, 뒤로 가기
