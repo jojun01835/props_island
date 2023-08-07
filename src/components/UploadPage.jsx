@@ -11,6 +11,7 @@ const { TextArea } = Input;
 const UploadPage = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const history = useNavigate();
+  const [password, setPassword] = useState(""); // 비밀번호를 저장할 상태 변수
 
   const onFinish = (values) => {
     axios
@@ -20,6 +21,7 @@ const UploadPage = () => {
         seller: values.seller,
         price: parseInt(values.price),
         imageUrl: imageUrl,
+        password: password, // 상태 변수에 저장된 비밀번호 값을 서버로 전송
       })
       .then((result) => {
         console.log(result);
@@ -30,6 +32,7 @@ const UploadPage = () => {
         message.error(`에러가 발생했습니다. ${error.message}`);
       });
   };
+
   const onChangeImage = (info) => {
     if (info.file.status === "uploading") {
       return;
@@ -84,6 +87,15 @@ const UploadPage = () => {
           rules={[{ required: true, message: "상품설명은 필수 입력 사항입니다." }]}
         >
           <TextArea size="large" id="product-description" showCount maxLength={300} placeholder="상품설명을 작성해주세요"></TextArea>
+        </Form.Item>
+        <Form.Item label={<span className="upload-label">비밀번호</span>} name="password" rules={[{ required: true, message: "비밀번호를 입력해주세요." }]}>
+          <Input.Password
+            className="upload-password"
+            placeholder="비밀번호를 입력해주세요"
+            size="large"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </Form.Item>
         <Form.Item>
           {/* {contextHolder} */}

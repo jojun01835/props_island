@@ -1,3 +1,5 @@
+// ProductPage.js
+
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -63,11 +65,11 @@ const ProductPage = () => {
       .then(() => {
         // 비밀번호가 맞으면 서버에서 제품을 삭제합니다.
         axios
-          .delete(`${API_URL}/products/${id}`, { data: { password } }) // 비밀번호 추가
+          .delete(`${API_URL}/products/${id}`, { data: { password } })
           .then(() => {
             message.info(`제품이 삭제되었습니다.`);
-            setPasswordModalVisible(false); // 비밀번호 검증 및 삭제 후 모달 닫기
-            navigate(-1); // 삭제 후, 뒤로 가기
+            setPasswordModalVisible(false);
+            navigate(-1);
           })
           .catch((error) => {
             message.error(`에러가 발생했습니다: ${error.message}`);
