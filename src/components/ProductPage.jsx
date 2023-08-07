@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProductPage.scss";
-import { Button, message } from "antd";
+import { Button, message, Input, Modal } from "antd";
 import { API_URL } from "../config/constants";
 import dayjs from "dayjs";
 
@@ -12,6 +12,9 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isPurchaseDisabled, setPurchaseDisabled] = useState(false);
+  const [isPasswordModalVisible, setPasswordModalVisible] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
 
   useEffect(() => {
     getProduct();
@@ -44,14 +47,61 @@ const ProductPage = () => {
   };
 
   const onClickDelete = () => {
+    setPassword("");
+    setPasswordError(false);
+    setPasswordModalVisible(true);
+    // 삭제를 위해 서버로 요청을 보내지 않고, 먼저 비밀번호를 확인하는 API를 호출합니다.
     axios
-      .delete(`${API_URL}/products/${id}`)
+      .post(`${API_URL}/products/${id}/verify-password`, { password })
       .then(() => {
-        message.info(`제품이 삭제되었습니다.`);
-        navigate(-1); // 삭제 후, 뒤로 가기
+        // 비밀번호가 일치하는 경우 서버로 제품 삭제를 요청합니다.
+        axios
+          .delete(`${API_URL}/products/${id}`)
+          .then(() => {
+            message.info(`제품이 삭제되었습니다.`);
+            navigate(-1); // 삭제 후, 뒤로 가기
+          })
+          .catch((error) => {
+            message.error(`에러가 발생했습니다: ${error.message}`);
+          });
       })
-      .catch((error) => {
-        message.error(`에러가 발생했습니다: ${error.message}`);
+      .catch(() => {
+        // 비밀번호가 일치하지 않는 경우 에러 처리합니다.
+        setPasswordError(true);
+      })
+      .finally(() => {
+        // 모달 닫기
+        setPasswordModalVisible(false);
+      });
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handlePasswordSubmit = () => {
+    // 서버로 비밀번호를 보내서 검증합니다.
+    axios
+      .post(`${API_URL}/products/${id}/verify-password`, { password })
+      .then(() => {
+        // 비밀번호가 맞으면 서버에서 제품을 삭제합니다.
+        axios
+          .delete(`${API_URL}/products/${id}`)
+          .then(() => {
+            message.info(`제품이 삭제되었습니다.`);
+            navigate(-1); // 삭제 후, 뒤로 가기
+          })
+          .catch((error) => {
+            message.error(`에러가 발생했습니다: ${error.message}`);
+          });
+      })
+      .catch(() => {
+        // 비밀번호가 틀리면 에러 처리합니다.
+        setPasswordError(true);
+      })
+      .finally(() => {
+        // 모달 닫기
+        setPasswordModalVisible(false);
       });
   };
 
@@ -80,6 +130,16 @@ const ProductPage = () => {
               제품 삭제하기
             </Button>
             <div id="description">{product.description}</div>
+            <Modal title="비밀번호 입력" visible={isPasswordModalVisible} onCancel={() => setPasswordModalVisible(false)} onOk={handlePasswordSubmit}>
+              <Input
+                type="password"
+                placeholder="비밀번호를 입력하세요"
+                value={password}
+                onChange={handlePasswordChange}
+                className={passwordError ? "error" : ""}
+              />
+              {passwordError && <p className="error-text">비밀번호가 틀렸습니다.</p>}
+            </Modal>
           </div>
         </div>
       </div>
