@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# 📚 react와 node.js, SQLite를 사용해서 만든 쇼핑 사이트
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<br>
+<br>
 
-In the project directory, you can run:
 
-### `npm start`
+## 🖥️ 프로젝트 소개
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+react와 node.js, SQLite를 사용해서 만든 쇼핑 사이트입니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![2](https://github.com/jojun01835/props_island/assets/73435598/480aa0ff-c7e6-4bdd-b41f-6d203e8c8fbf)
+![3](https://github.com/jojun01835/props_island/assets/73435598/28db8912-248e-4e18-b151-3ccc61792114)
+![4](https://github.com/jojun01835/props_island/assets/73435598/145c590e-a5bf-4e31-a7ec-c1ba33261ba1)
+![5](https://github.com/jojun01835/props_island/assets/73435598/eb331e8e-0e35-4d76-a81f-f953afc4c481)
+![9](https://github.com/jojun01835/props_island/assets/73435598/e669f518-2518-4196-a2e1-594c4b90dd85)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `npm run build`
+## 🕰️ 개발 기간
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   23.08.01 - 23.08.06 (6일)
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ⚙️ 개발 환경
 
-### `npm run eject`
+-   `React 18`
+-   `CSS (CSS-module)`
+-   `IDE : VScode 1.80`
+-   `DEPLOY : Github.io`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 💻 Release History
+* 0.0.1 (23.08.06)
+    * first release
+<br>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📌 주요 기능
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### 기능
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+-  상품 추가가 가능 
+-  상품의 삭제가 가능합니다 입력한 비밀번호를 사용해서 제품 삭제가 가능
+-  데이터베이스를 사용해서 다른 사람이 등록한 상품도 볼 수 있게 설계됨 
 
-## Learn More
+<br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## ➕ 추가 기능
+- 관리자 계정을 만들어서 상품을 관리하기 편하게 만듬
+- 아이디랑 추천 버튼을 추가해서 추천을 많이 받은 상품을 상위로 노출시키기
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## ➖ 수정할 사항
+- 현재 다른 사람이 등록한 상품은 내가 비밀번호를 알지 못하면 삭제가 불가능함
+- 컴포넌트와 페이지를 최적화 및 분리하여 재사용성과 가독성 높이기
